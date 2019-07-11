@@ -1,11 +1,5 @@
-var gulp = require('gulp');
-var Server = require('karma').Server;
-var paths = require('../paths');
+const gulp = require('gulp');
+const {build} = require('./build');
 
-
-/**
- * Default task
- * Run using "gulp"
- * Runs all tasks
- */
-gulp.task('default', ['clean', 'build', 'lint', 'test']);
+gulp.task('default', build);
+exports.default = build;

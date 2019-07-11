@@ -15,16 +15,16 @@ module.exports = {
     },
 
     module: {
-        loaders: [
+        rules: [
             {
-                test: /.js?$/,
+                exclude: /node_modules/,
                 loader: 'babel-loader',
-                exclude: /node_modules/
+                test: /.js?$/
             }
         ]
     },
 
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin()
-    ]
+    optimization: {
+        minimize: true,
+    }
 };

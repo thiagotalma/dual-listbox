@@ -1,4 +1,4 @@
-import DualListbox, {DualListbox as DualListbox2} from '../src/dual-listbox.js';
+import DualListbox, {DualListbox as DualListbox2} from '../../src/dual-listbox.js';
 
 
 const SELECT_CLASS = 'select';

@@ -1,24 +1,45 @@
-var gulp = require('gulp');
-var webpack = require('webpack-stream');
-var autoprefixer = require('gulp-autoprefixer');
-var purge = require('gulp-css-purge');
-var minify = require('gulp-minify-css');
-var sass = require('gulp-sass');
-var paths = require('../paths');
-var webpackConfig = require('../../webpack.config.js');
+const gulp = require('gulp');
+const paths = require('../paths');
+const {js} = require('./js');
+const {lint} = require('./lint');
+const {scss} = require('./scss');
 
 
 /**
  * Watch task
  * Run using "gulp watch"
- * Runs the build-js and build-sass
+ * Runs "watch-js" and "watch-sass" tasks
  */
-gulp.task('watch-sass', function() {
-    gulp.watch(paths.sassSource, ['build-sass']);
-});
+const watch = gulp.parallel(watchJS, watchSCSS);
 
-gulp.task('watch-js', function() {
-    gulp.watch(paths.source, ['build-js']);
-});
 
-gulp.task('watch', ['build', 'watch-sass', 'watch-js']);
+/**
+ * Watch-js task
+ * Run using "gulp watch-js"
+ * Runs "js" and "lint" tasks instantly and when any file in paths.jsSrc changes
+ */
+function watchJS() {
+    gulp.watch([paths.jsSrc, paths.jsSpec], gulp.parallel(js, lint));
+}
+
+/**
+ * Watch-sass task
+ * Run using "gulp watch-scss"
+ * Runs "sass" task instantly and when any file in paths.sassSrc changes
+ */
+function watchSCSS() {
+    gulp.watch(paths.sassSrc, scss);
+}
+
+
+
+exports.watch = watch;
+gulp.task('watch', watch);
+
+
+exports.watchJS = watchJS;
+gulp.task('watch-js', watchJS);
+
+
+exports.watchSCSS = watchSCSS;
+gulp.task('watch-scss', watchSCSS);
