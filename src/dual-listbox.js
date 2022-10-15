@@ -391,16 +391,16 @@ class DualListbox {
 
         this.dualListBoxContainer.appendChild(
             this._createList(
-                this.search_left,
                 this.availableListTitle,
+                this.search_left,
                 this.availableList
             )
         );
         this.dualListBoxContainer.appendChild(this.buttons);
         this.dualListBoxContainer.appendChild(
             this._createList(
-                this.search_right,
                 this.selectedListTitle,
+                this.search_right,
                 this.selectedList
             )
         );
